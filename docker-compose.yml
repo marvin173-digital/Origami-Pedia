@@ -1,0 +1,49 @@
+services:
+  app:
+    build: .
+    ports:
+      - "${APP_PORT:-8000}:8000"
+    environment:
+      DB_HOST: db
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - origami-net
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - origami-net
+
+  adminer:
+    image: adminer:4.8.1
+    profiles: ["tools"]
+    ports:
+      - "${ADMINER_PORT:-8081}:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - origami-net
+
+networks:
+  origami-net:
+    driver: bridge
+
+volumes:
+  pgdata:
