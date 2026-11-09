@@ -2,15 +2,55 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Katalog Origami</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OrigamiPedia</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: system-ui, Arial, sans-serif; background: #f4f1ea; color: #2b2b2b; }
+    header { background: #c0392b; color: #fff; padding: 32px 20px; text-align: center; }
+    header h1 { margin: 0 0 6px; font-size: 2rem; }
+    header p { margin: 0; opacity: .9; }
+    main { max-width: 960px; margin: 0 auto; padding: 24px 16px; }
+    .filters { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+    .filters a { padding: 8px 16px; border-radius: 20px; background: #fff; color: #444;
+                 text-decoration: none; border: 1px solid #ddd; }
+    .filters a.active { background: #c0392b; color: #fff; border-color: #c0392b; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .card { background: #fff; border-radius: 12px; padding: 18px; box-shadow: 0 2px 6px rgba(0,0,0,.08); }
+    .card h3 { margin: 0 0 8px; }
+    .badge { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: .8rem; color: #fff; }
+    .mudah { background: #2e8b3d; } .sedang { background: #e69a00; } .sulit { background: #c0392b; }
+    .steps { white-space: pre-line; margin: 12px 0 0; line-height: 1.5; color: #444; }
+    .empty { text-align: center; color: #777; }
+    footer { text-align: center; color: #888; padding: 20px; font-size: .85rem; }
+  </style>
 </head>
 <body>
-  <h1>Katalog Origami</h1>
-  {% for o in items %}
-    <h3>{{ o.name }} ({{ o.difficulty }})</h3>
-    <p>{{ o.steps }}</p>
-  {% else %}
-    <p>Belum ada data.</p>
-  {% endfor %}
+  <header>
+    <h1>OrigamiPedia</h1>
+    <p>Katalog tutorial origami langkah demi langkah</p>
+  </header>
+  <main>
+    <nav class="filters">
+      <a href="/" class="{{ 'active' if not active }}">Semua</a>
+      <a href="/?difficulty=mudah" class="{{ 'active' if active == 'mudah' }}">Mudah</a>
+      <a href="/?difficulty=sedang" class="{{ 'active' if active == 'sedang' }}">Sedang</a>
+      <a href="/?difficulty=sulit" class="{{ 'active' if active == 'sulit' }}">Sulit</a>
+    </nav>
+    {% if items %}
+    <div class="grid">
+      {% for o in items %}
+      <div class="card">
+        <h3>{{ o.name }}</h3>
+        <span class="badge {{ o.difficulty }}">{{ o.difficulty }}</span>
+        <p class="steps">{{ o.steps }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+      <p class="empty">Belum ada data untuk filter ini.</p>
+    {% endif %}
+  </main>
+  <footer>UTS Cloud Services - COMP6991031</footer>
 </body>
 </html>

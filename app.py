@@ -75,5 +75,11 @@ def add_origami():
 
 @app.get("/")
 def index():
-    rows = query("SELECT * FROM origami ORDER BY id", fetch=True)
-    return render_template("index.html", items=rows)
+    difficulty = request.args.get("difficulty")
+    if difficulty:
+        rows = query(
+            "SELECT * FROM origami WHERE difficulty = %s ORDER BY id",
+            (difficulty,), fetch=True)
+    else:
+        rows = query("SELECT * FROM origami ORDER BY id", fetch=True)
+    return render_template("index.html", items=rows, active=difficulty)
