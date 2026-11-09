@@ -36,6 +36,7 @@ def init_db():
             steps TEXT NOT NULL
         )
     """)
+    query("ALTER TABLE origami ADD COLUMN IF NOT EXISTS image VARCHAR(255)")
 
 
 init_db()
@@ -64,12 +65,13 @@ def add_origami():
     name = data.get("name")
     difficulty = data.get("difficulty")
     steps = data.get("steps")
+    image = data.get("image")
     if not (name and difficulty and steps):
         return jsonify(error="name, difficulty, steps wajib diisi"), 400
     rows = query(
-        "INSERT INTO origami (name, difficulty, steps) "
-        "VALUES (%s, %s, %s) RETURNING id",
-        (name, difficulty, steps), fetch=True)
+        "INSERT INTO origami (name, difficulty, steps, image) "
+        "VALUES (%s, %s, %s, %s) RETURNING id",
+        (name, difficulty, steps, image), fetch=True)
     return jsonify(id=rows[0]["id"], name=name), 201
 
 

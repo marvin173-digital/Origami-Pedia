@@ -23,6 +23,8 @@
     .steps { white-space: pre-line; margin: 12px 0 0; line-height: 1.5; color: #444; }
     .empty { text-align: center; color: #777; }
     footer { text-align: center; color: #888; padding: 20px; font-size: .85rem; }
+    .card img { width: 100%; height: 200px; object-fit: cover; object-position: top;
+            border-radius: 8px; margin-bottom: 10px; }
   </style>
 </head>
 <body>
@@ -41,6 +43,9 @@
     <div class="grid">
       {% for o in items %}
       <div class="card">
+        {% if o.image %}
+        <a href="{{ o.image }}" target="_blank"><img src="{{ o.image }}" alt="{{ o.name }}"></a>
+        {% endif %}
         <h3>{{ o.name }}</h3>
         <span class="badge {{ o.difficulty }}">{{ o.difficulty }}</span>
         <p class="steps">{{ o.steps }}</p>

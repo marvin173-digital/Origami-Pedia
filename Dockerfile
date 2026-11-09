@@ -12,5 +12,6 @@ WORKDIR /app
 COPY --from=builder /install /usr/local
 COPY app.py .
 COPY templates ./templates
+COPY static ./static
 EXPOSE 8000
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]
