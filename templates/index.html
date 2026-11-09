@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Katalog Origami</title>
+</head>
+<body>
+  <h1>Katalog Origami</h1>
+  {% for o in items %}
+    <h3>{{ o.name }} ({{ o.difficulty }})</h3>
+    <p>{{ o.steps }}</p>
+  {% else %}
+    <p>Belum ada data.</p>
+  {% endfor %}
+</body>
+</html>
