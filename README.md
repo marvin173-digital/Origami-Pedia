@@ -72,4 +72,4 @@ Buka http://localhost:8000. Untuk Adminer:
   - Menjalankan semua perintah di terminal (Git, Docker, curl) serta pengujian dan screenshot
   - Menerapkan dan memperbaiki konfigurasi sampai berjalan: mengubah port Adminer yang bentrok di `docker-compose.yml` dan memperbaiki error YAML (diagnosis dibantu Claude)
   - Menulis langkah tutorial origami di database dan menyiapkan gambar
-  - Menulis video, artikel, dan penjelasan di laporan [hapus yang belum kamu kerjakan saat mengumpulkan]
+  - Menulis video, artikel, dan penjelasan di laporan 
