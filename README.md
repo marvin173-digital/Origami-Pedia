@@ -50,8 +50,8 @@ Buka http://localhost:8000. Untuk Adminer:
 - Teks langkah tutorial ditulis sendiri.
 
 ## Tautan
-- Artikel: [isi nanti]
-- Video: [isi nanti]
+- Artikel: https://dev.to/marvino/origamipedia-building-a-multi-tier-app-with-docker-compose-2kej
+- Video: https://youtu.be/3tUQnIgfwqQ
 
 ## AI Usage Declaration
 - **Alat:** Claude (Anthropic), dan Gemini
